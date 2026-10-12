@@ -1,0 +1,92 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html {
+    /* scrolling to a section is animated in src/lib/scroll.ts (native smooth scroll is cancelled mid-way here) */
+    -webkit-text-size-adjust: 100%;
+    scroll-padding-top: 54px; /* keeps anchored pages clear of the sticky top bar */
+    scroll-snap-type: y proximity; /* each page settles into place; never traps tall content */
+  }
+  body {
+    @apply bg-[#2A211B] font-serif text-[16px] text-ink antialiased;
+    overflow-x: clip;
+  }
+  img {
+    -webkit-user-drag: none;
+  }
+  /* Lora and Cormorant default to old-style figures in places; dates and the countdown need lining numerals. */
+  body {
+    font-variant-numeric: lining-nums;
+  }
+  :focus-visible {
+    outline: 2px solid #a8782f;
+    outline-offset: 3px;
+    border-radius: 6px;
+  }
+  ::selection {
+    background: #d2a958aa;
+  }
+}
+
+@layer components {
+  /* The phone-shaped column, centred on wider screens like the reference sheet. */
+  .page {
+    @apply relative mx-auto min-h-screen w-full max-w-[430px] overflow-x-clip bg-paper shadow-[0_0_60px_-10px_rgba(0,0,0,0.6)];
+    background-image:
+      radial-gradient(ellipse at 15% 0%, rgba(255, 250, 236, 0.9), transparent 55%),
+      radial-gradient(ellipse at 90% 55%, rgba(246, 232, 206, 0.8), transparent 60%);
+  }
+
+  /* Script lettering in gold-brown; padding keeps the long swashes inside the painted area. */
+  .script-ink {
+    background: linear-gradient(100deg, #6f4411 0%, #a8782f 40%, #7a4a14 60%, #9c6a22 100%);
+    background-size: 300% 100%;
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    padding: 0.18em 0.3em;
+    margin: -0.18em -0.3em;
+  }
+
+  .btn-gold {
+    @apply relative inline-flex items-center justify-center gap-2 overflow-hidden rounded-full bg-gradient-to-b from-[#B98A3E] to-[#98692A] px-6 py-3.5 font-serif text-[17px] font-medium tracking-wide text-[#FFF8E8] shadow-card transition-transform duration-200 hover:-translate-y-px active:translate-y-0 disabled:cursor-not-allowed disabled:opacity-70;
+  }
+  /* A soft light sweep passes across the gold buttons every few seconds. */
+  .btn-gold:not(:disabled)::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(110deg, transparent 35%, rgba(255, 240, 200, 0.4) 50%, transparent 65%);
+    transform: translateX(-130%);
+    animation: btn-shine 4.2s ease-in-out infinite;
+    pointer-events: none;
+  }
+
+  .btn-outline {
+    @apply inline-flex items-center justify-center gap-2.5 rounded-full border border-gold-soft bg-paper-pale/70 px-7 py-3 font-serif text-[16px] text-cocoa transition-colors duration-200 hover:bg-paper-pale;
+  }
+
+  .field {
+    @apply w-full rounded-xl border border-paper-edge bg-paper-pale/80 px-4 py-3.5 font-serif text-[16px] text-ink shadow-[inset_0_1px_2px_rgba(120,80,20,0.06)] placeholder:text-ink-mute/80 focus:border-gold focus:outline-none focus:ring-2 focus:ring-gold/30;
+  }
+}
+
+@keyframes btn-shine {
+  0%, 55% { transform: translateX(-130%); }
+  100% { transform: translateX(130%); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+  }
+}
