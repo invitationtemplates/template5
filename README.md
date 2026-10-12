@@ -63,7 +63,7 @@ src/
 │                            progress), Lightbox, Icons (monogram, brands), Reveal, MusicPlayer
 ├─ hooks/useCountdown.ts
 ├─ lib/                      dates, image (Cloudinary), rsvp (integration point), guest, calendar, scroll
-├─ assets/                   photos/ and painted floral PNGs
+├─ assets/                   photos/ and florals/ (every image the site imports)
 └─ styles/index.css
 ```
 
@@ -80,8 +80,9 @@ src/
 | `g1`…`g10` | "View More Photos" viewer | 1000 on the long edge |
 | `venue.webp`, `map.webp` | Venue photo and map card | 1400 x 750 |
 | `palace-faint.webp` | Watermark behind the thank-you page | 1600 x 700 |
-| `src/assets/fl-*.png` | Painted floral corners and strips (transparent) | as supplied |
-| `public/og-image.jpg` | Link preview | 1200 x 630 |
+| `src/assets/florals/fl-*.png` | Painted floral corners and strips (transparent PNG) | as supplied |
+| `public/assets/og-image.jpg` | Link preview (WhatsApp, social) | 1200 x 630 |
+| `public/assets/favicon.svg` | Browser tab icon | square SVG |
 
 ## RSVP: how replies are handled
 
@@ -95,3 +96,14 @@ src/
 
 - Anchor links (menu and arrows) use their own scroll animation in `src/lib/scroll.ts`. The browser's native smooth scroll gets cancelled part-way on a page this long.
 - The hero text and date frame scale with the screen height so the first screen always fits phones from 320 px up.
+
+## Image folders
+
+```
+src/assets/
+├─ photos/     22 pictures: hero, hero-flowers, story, gal-*, g1…g10, venue, map, palace-faint
+└─ florals/    7 painted floral PNGs: fl-tl, fl-tr, fl-bl, fl-br, fl-strip, fl-strip-rsvp, fl-top-left-s2
+public/assets/ og-image.jpg (link preview) and favicon.svg
+```
+
+Pictures in `src/assets` are imported by the code and fingerprinted by Vite at build time. The two files in `public/assets` are referenced by URL from `index.html`.

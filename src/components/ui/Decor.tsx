@@ -1,12 +1,12 @@
 import { motion } from "motion/react";
 import type { ReactNode } from "react";
-import flTl from "../../assets/fl-tl.png";
-import flTr from "../../assets/fl-tr.png";
-import flBl from "../../assets/fl-bl.png";
-import flBr from "../../assets/fl-br.png";
-import flStrip from "../../assets/fl-strip.png";
-import flStripRsvp from "../../assets/fl-strip-rsvp.png";
-import flTopS2 from "../../assets/fl-top-left-s2.png";
+import flTl from "../../assets/florals/fl-tl.png";
+import flTr from "../../assets/florals/fl-tr.png";
+import flBl from "../../assets/florals/fl-bl.png";
+import flBr from "../../assets/florals/fl-br.png";
+import flStrip from "../../assets/florals/fl-strip.png";
+import flStripRsvp from "../../assets/florals/fl-strip-rsvp.png";
+import flTopS2 from "../../assets/florals/fl-top-left-s2.png";
 
 /** Decorative images are hidden from assistive tech and never take pointer events. */
 const base = "pointer-events-none select-none";
